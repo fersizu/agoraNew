@@ -1,0 +1,15 @@
+/* Header.css */
+
+.header {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+    padding: 20px; /* Espaciado alrededor del texto */
+    font-size: 2rem; /* Tamaño de la fuente */
+    font-weight: bold; /* Peso de la fuente */
+  }
+  
+  .header h1 {
+    margin: 0; /* Eliminar márgenes predeterminados */
+  }
+  
