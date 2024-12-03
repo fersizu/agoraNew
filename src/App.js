@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 import Header from "./components/header";
 import ProductForm from "./components/ProductForm";
 import ProductList from "./components/ProductList";
@@ -8,12 +8,16 @@ import TotalCost from "./components/TotalCost";
 import Chart from "./components/Chart";
 import { Bar } from "react-chartjs-2";
 import ChartJS from "chart.js/auto";
+import Login from "./components/login"
+import Register from "./components/Register";
+
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
   // Agregar un nuevo producto
   const addProduct = (product) => {
     // Evitar duplicados por nombre y fecha de expiración
@@ -68,7 +72,7 @@ const App = () => {
         setNotifications((prevNotifications) =>
           prevNotifications.filter((n) => n !== newNotification)
         );
-      }, 10000);
+      }, 15000);
     }
   };
 
@@ -155,8 +159,14 @@ const App = () => {
         <Routes>
           <Route
             path="/"
+            element={!isAuthenticated ? <Login setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/dashboard" />}
+          />
+          <Route path="/register" element={<Register />} />
+          
+          <Route
+            path="/dashboard"
             element={
-              <>
+              isAuthenticated ? ( <>
                 <div style={{ textAlign: "center", marginBottom: "20px" }}>
                   <Link to="/add-product">
                     <button
@@ -185,11 +195,14 @@ const App = () => {
                   <Bar data={chartData} options={chartOptions} />
                 </div>
               </>
+              ) : (
+                <Navigate to="/" />
+              )
             }
           />
           <Route
             path="/add-product"
-            element={<ProductForm addProduct={addProduct} />}
+            element={isAuthenticated ? <ProductForm addProduct={addProduct} /> : <Navigate to="/" />}
           />
         </Routes>
       </main>
