@@ -72,7 +72,7 @@ const App = () => {
         setNotifications((prevNotifications) =>
           prevNotifications.filter((n) => n !== newNotification)
         );
-      }, 15000);
+      }, 10000);
     }
   };
 
@@ -162,7 +162,7 @@ const App = () => {
             element={!isAuthenticated ? <Login setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/dashboard" />}
           />
           <Route path="/register" element={<Register />} />
-          
+
           <Route
             path="/dashboard"
             element={

@@ -10,7 +10,7 @@ const Login = ({ setIsAuthenticated }) => {
     // Verificar si no hay usuarios registrados y agregar un usuario de prueba
     const users = JSON.parse(localStorage.getItem("users")) || [];
     if (users.length === 0) {
-      const testUser = { email: "test@example.com", password: "test123" };
+      const testUser = { email: "usuario@hotmail.com", password: "123" };
       users.push(testUser);
       localStorage.setItem("users", JSON.stringify(users));
       console.log("Usuario de prueba añadido:", testUser);
